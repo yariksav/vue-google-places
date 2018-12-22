@@ -37,6 +37,32 @@ Vue.use(VueGooglePlaces)
     @placechanged="onPlaceChanged"
   />
 ```
+
+## Props
+
+| name | type | default | description |
+|------|------|---------|-------------|
+|apiKey| String | - | Google api key |
+|enableGeolocation| Boolean | false | component will ask user geolocation |
+|enableGeocode| Boolean | false | conponent will automatically find user place by his geolocation. This depends of `enableGeolocation` property|
+|version| String | - | version of google maps api|
+|types|String, Array| - |Supported user types [See google docs (Table 3)](https://developers.google.com/places/supported_types)
+
+Types:
+  - geocode
+  - address
+  - establishment
+  - (regions)
+  - (cities)
+
+## Events
+
+ - placechanged - when user has selected new place
+ - input - name of selected place
+
+## Slots
+ - default - in this slot you can put your own input component
+
 ## Other frameworks
   This component implemented in such frameworks:
 
@@ -55,19 +81,6 @@ Vue.use(VueGooglePlaces)
   />
 ```
 > To implement this module in other frameworks - welcome to contribute! Please use VuetifyGooglePlaces as template
-
-## Props
-
- - apiKey: Google api key
- - enableGeolocation: component will ask user geolocation
- - enableGeocode: conponent will automatically find user place by his geolocation. This depends of `enableGeolocation` property
- - version: version of google maps api
- - types: String, Array. Supported user types [See google docs (Table 3)](https://developers.google.com/places/supported_types)
-    - geocode
-    - address
-    - establishment
-    - (regions)
-    - (cities)
 
 ### Implementation with own input component
 
