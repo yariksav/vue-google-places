@@ -1,6 +1,5 @@
 // rollup.config.js
 import buble from 'rollup-plugin-buble';
-// import async from 'rollup-plugin-async';
 import uglify from 'rollup-plugin-uglify-es';
 import minimist from 'minimist';
 
@@ -16,7 +15,6 @@ const config = {
     }
   },
   plugins: [
-    // async(),
     buble({
       objectAssign: 'Object.assign'
     })

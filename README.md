@@ -52,13 +52,13 @@ Vue.use(VueGooglePlaces)
     - (regions)
     - (cities)
 
-
 ### Implementation with own input component
 
 To use with own input component use default slot. VueGooglePlaces will automatically find html input element
 ```js
   import { VueGooglePlaces } from 'vue-google-places'
 ```
+
 ```vue
   <VueGooglePlaces
     :api-key="apiKey"
@@ -67,6 +67,7 @@ To use with own input component use default slot. VueGooglePlaces will automatic
     types="(cities)"
     country="us"
     @placechanged="getAddressData"
+  >
     <MyInput
       icon="search"
       :value="value"
