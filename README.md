@@ -8,8 +8,8 @@
   <a href="https://www.npmjs.org/package/vue-google-places">
     <img src="https://img.shields.io/npm/v/vue-google-places.svg">
   </a>
-  <a href="http://img.badgesize.io/https://unpkg.com/vue-google-places/dist/vue-google-places.min.js?compression=gzip&label=gzip%20size:%20JS">
-    <img src="http://img.badgesize.io/https://unpkg.com/vue-google-places/dist/vue-google-places.cjs.js?compression=gzip&label=gzip%20size:%20JS">
+  <a href="http://img.badgesize.io/https://unpkg.com/vue-google-places/dist/vue-google-places.js?compression=gzip&label=gzip%20size:%20JS">
+    <img src="http://img.badgesize.io/https://unpkg.com/vue-google-places/dist/vue-google-places.esm.js?compression=gzip&label=gzip%20size:%20JS">
   </a>
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
