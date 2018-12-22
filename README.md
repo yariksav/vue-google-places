@@ -12,15 +12,12 @@ Vue.use(VueGooglePlaces)
 ## Use
 
 ```vue
-  <VuetifyGooglePlaces
+  <VueGooglePlaces
     :api-key="apiKey"
-    class="subheading"
-    :enable-geolocation="true"
     types="(cities)"
     country="ua"
-    :value="place && place.name"
-    placeholder="Places"
-    @placechanged="getAddressData"
+    placeholder="Input your place"
+    @placechanged="onPlaceChanged"
   />
 ```
 ## Other frameworks
