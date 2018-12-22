@@ -1,8 +1,8 @@
-import VueGooglePlaces from './VueGooglePlaces'
+import mixin from './mixin'
 
 export default {
+  mixins: [mixin],
   props: {
-    value: String,
     searchIcon: {
       type: String,
       default: () => 'search'
@@ -12,20 +12,9 @@ export default {
       default: () => 'close'
     }
   },
-  data () {
-    return {
-      val: this.value,
-      place: null
-    }
-  },
   computed: {
     getAppendIcon () {
       return this.place ? this.clearIcon : this.searchIcon
-    }
-  },
-  watch: {
-    value (value) {
-      this.val = value
     }
   },
   methods: {
@@ -43,23 +32,5 @@ export default {
         }
       })
     }
-  },
-  render (h) {
-    return h(VueGooglePlaces, {
-      ref: 'gp',
-      attrs: this.$attrs,
-      on: {
-        placechanged: (place) => {
-          this.place = place
-          this.$emit('placechanged', place)
-        },
-        input: (value) => {
-          this.val = value
-          this.$emit('input', value)
-        }
-      }
-    }, [
-      this.renderInput()
-    ])
   }
 }
