@@ -46,9 +46,9 @@ Vue.use(VueGooglePlaces)
 |enableGeolocation| Boolean | false | component will ask user geolocation |
 |enableGeocode| Boolean | false | conponent will automatically find user place by his geolocation. This depends of `enableGeolocation` property|
 |version| String | - | version of google maps api|
-|types|String, Array| - |Supported user types [See google docs (Table 3)](https://developers.google.com/places/supported_types)
+|types|String, Array| - |Google places types [See google docs (Table 3)](https://developers.google.com/places/supported_types)
 
-Types:
+Available types:
   - geocode
   - address
   - establishment
