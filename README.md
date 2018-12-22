@@ -21,8 +21,9 @@ Vue.use(VueGooglePlaces)
   />
 ```
 ## Other frameworks
-  This component implemented in this frameworks:
-  - Vuetify:
+  This component implemented in such frameworks:
+
+### Vuetify
 ```js
   import { VuetifyGooglePlaces } from 'vue-google-places'
 ```
@@ -36,7 +37,7 @@ Vue.use(VueGooglePlaces)
     @placechanged="onPlaceChanged"
   />
 ```
-> To implement this module in other framework - welcome to contribute! Please use VuetifyGooglePlaces as template
+> To implement this module in other frameworks - welcome to contribute! Please use VuetifyGooglePlaces as template
 
 ## Props
 
