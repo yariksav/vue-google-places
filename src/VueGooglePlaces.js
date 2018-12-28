@@ -1,6 +1,7 @@
 
 import loadJS from 'load-js'
 
+let loadModulePromise
 const loadModule = (options) => {
   if (Object.prototype.hasOwnProperty.call(window, 'google')) {
     return Promise.resolve()
@@ -12,7 +13,10 @@ const loadModule = (options) => {
     .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(opt[key])}`)
     .join('&')
   let url = `https://maps.googleapis.com/maps/api/js?${parameters}`
-  return loadJS(url)
+  return loadJS(url).catch(e => {
+    loadModulePromise = null
+    console.warn('Error loading google maps script', e)
+  })
 }
 
 export default {
@@ -54,7 +58,7 @@ export default {
     }
   },
   created () {
-    this.prepare = loadModule({
+    loadModulePromise = loadModulePromise || loadModule({
       key: this.apiKey,
       v: this.version
     })
@@ -68,7 +72,7 @@ export default {
     }, this.addressFields)
   },
   mounted () {
-    this.prepare.then(() => {
+    loadModulePromise.then(() => {
       this.setupGoogle()
     })
   },
