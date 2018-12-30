@@ -67,7 +67,8 @@ export default {
       route: 'long_name',
       locality: 'long_name',
       administrative_area_level_1: 'short_name',
-      country: 'long_name',
+      administrative_area_level_2: 'short_name',
+      administrative_area_level_3: 'short_name',
       postal_code: 'short_name'
     }, this.addressFields)
   },
@@ -126,6 +127,10 @@ export default {
             const val = place.address_components[i][this.parsedAddressFields[addressType]]
             returnData[addressType] = val
           }
+          if (addressType === 'country') {
+            returnData.country = place.address_components[i]['long_name']
+            returnData.country_code = place.address_components[i]['short_name']
+          }
         }
 
         returnData.latitude = place.geometry.location.lat()
@@ -133,8 +138,10 @@ export default {
 
         // additional fields available in google places results
         returnData.name = place.name
+        returnData.formatted_address = place.formatted_address
         returnData.photos = place.photos
         returnData.place_id = place.place_id
+        returnData.place = place
       }
       return returnData
     },
