@@ -95,7 +95,7 @@ export default {
           if (!this.hasDownBeenPressed && !e.hasRanOnce) {
             let event = { keyCode: 40, hasRanOnce: true }
             if (window.KeyboardEvent) {
-              event = KeyboardEvent('keydown', event)
+              event = new window.KeyboardEvent('keydown', event)
             }
             google.maps.event.trigger(e.target, 'keydown', event)
           }
