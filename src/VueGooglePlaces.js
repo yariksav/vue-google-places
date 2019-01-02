@@ -35,7 +35,9 @@ export default {
       geolocateSet: false,
       prepared: false,
       textValue: '',
-      currentPlace: null
+      currentPlace: null,
+      enterPressListener: null,
+      hasDownBeenPressed: false
     }
   },
   computed: {
@@ -78,6 +80,32 @@ export default {
     })
   },
   methods: {
+    setupInput () {
+      this.element.addEventListener('keydown', (e) => {
+        if (e.keyCode === 40) {
+          this.hasDownBeenPressed = true;
+        }
+      })
+    
+      this.enterPressListener = window.google.maps.event.addDomListener(this.element, 'keydown', (e) => {
+        e.cancelBubble = true;
+        // If enter key, or tab key
+        if (e.keyCode === 13 || e.keyCode === 9) {
+          // If user isn't navigating using arrows and this hasn't ran yet
+          if (!this.hasDownBeenPressed && !e.hasRanOnce) {
+            let event = { keyCode: 40, hasRanOnce: true }
+            if (window.KeyboardEvent) {
+              event = KeyboardEvent('keydown', event)
+            }
+            google.maps.event.trigger(e.target, 'keydown', event)
+          }
+        }
+      })
+
+      this.element.addEventListener('focus', () => {
+        this.hasDownBeenPressed = false
+      })
+    },
     setupGoogle () {
       const options = {}
 
@@ -106,6 +134,8 @@ export default {
         this.element,
         options
       )
+      this.setupInput()
+
       this.autocomplete.addListener('place_changed', this.onPlaceChange)
       this.geocoder = new window.google.maps.Geocoder()
       this.geolocate()
@@ -152,6 +182,7 @@ export default {
       this.currentPlace = place
     },
     onPlaceChange () {
+      this.hasDownBeenPressed = false
       const place = this.autocomplete.getPlace()
 
       if (!place.geometry) {
@@ -208,5 +239,10 @@ export default {
     return h('div', {
       class: 'v-google-places'
     }, inputNode)
+  },
+  beforeDestroy () {
+    if (this.enterPressListener) {
+      window.google.maps.event.removeListener(this.enterPressListener)
+    }
   }
 }
