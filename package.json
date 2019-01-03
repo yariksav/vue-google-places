@@ -13,8 +13,8 @@
     "src/*"
   ],
   "scripts": {
-    "build2": "npm run build && cp -r dist/ ../../cmpact/billing-front/node_modules/vue-google-places/dist/  && cp -r src/ ../../cmpact/billing-front/node_modules/vue-google-places/src/",
     "build": "npm run build:unpkg & npm run build:es & npm run build:umd",
+    "build:copy": "npm run build && bash build/copy.sh",
     "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-google-places.umd.js",
     "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-google-places.esm.js",
     "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-google-places.min.js",
