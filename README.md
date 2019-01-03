@@ -35,6 +35,7 @@ Vue.use(VueGooglePlaces)
     country="ua"
     placeholder="Input your place"
     @placechanged="onPlaceChanged"
+    @noresult="onNoResult"
   />
 ```
 
@@ -57,11 +58,12 @@ Available types:
 
 ## Events
 
- - placechanged - when user has selected new place
- - input - name of selected place
+ - `placechanged`: Place - when user has selected new place
+ - `input`: String - name of selected place
+ - `noresult`: Place - when place has changed but details was not found
 
 ## Slots
- - default - in this slot you can put your own input component
+ - `default` - in this slot you can put your own input component
 
 ## Other frameworks
   This component implemented in such frameworks:

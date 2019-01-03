@@ -80,6 +80,38 @@ export default {
     })
   },
   methods: {
+    enableEnterKey (input) {
+
+      /* Store original event listener */
+      const _addEventListener = input.addEventListener
+  
+      const addEventListenerWrapper = (type, listener) => {
+        if (type === "keydown") {
+          /* Store existing listener function */
+          const _listener = listener
+          listener = (event) => {
+            /* Simulate a 'down arrow' keypress if no address has been selected */
+            const suggestion_selected = document.getElementsByClassName('pac-item-selected').length > 0
+            if (event.which === 13 && !suggestion_selected) {
+              // let e = { keyCode: 40, which: 40 }
+              // if (window.KeyboardEvent) {
+              //   e = new window.KeyboardEvent('keydown', e)
+              // }
+              // _listener.apply(input, [e])
+              const e = JSON.parse(JSON.stringify(event))
+              e.which = 40
+              e.keyCode = 40
+              console.log('e', e)
+              _listener.apply(input, [e])
+            }
+            _listener.apply(input, [event])
+          }
+        }
+        _addEventListener.apply(input, [type, listener])
+      }
+  
+      input.addEventListener = addEventListenerWrapper
+    },
     setupInput () {
       this.element.addEventListener('keydown', (e) => {
         if (e.keyCode === 40) {
@@ -134,6 +166,7 @@ export default {
         this.element,
         options
       )
+      // this.enableEnterKey(this.element)
       this.setupInput()
 
       this.autocomplete.addListener('place_changed', this.onPlaceChange)
@@ -188,7 +221,7 @@ export default {
       if (!place.geometry) {
         // User entered the name of a Place that was not suggested and
         // pressed the Enter key, or the Place Details request failed.
-        this.$emit('no-results', place)
+        this.$emit('noresult', place)
         return
       }
 

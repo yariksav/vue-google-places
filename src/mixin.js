@@ -20,6 +20,7 @@ export default {
       ref: 'gp',
       attrs: this.$attrs,
       on: {
+        ...this.$listeners,
         placechanged: (place) => {
           this.place = place
           this.$emit('placechanged', place)
