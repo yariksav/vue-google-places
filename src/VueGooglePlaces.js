@@ -60,10 +60,16 @@ export default {
     }
   },
   created () {
-    loadModulePromise = loadModulePromise || loadModule({
-      key: this.apiKey,
-      v: this.version
-    })
+    // STUB for vue2-google-maps and vue-google-places work together
+    // TODO chanhe this to @google/map module in future
+    if (typeof this.$gmapApiPromiseLazy === 'function') {
+      loadModulePromise = this.$gmapApiPromiseLazy()
+    } else {
+      loadModulePromise = loadModulePromise || loadModule({
+        key: this.apiKey,
+        v: this.version
+      })
+    }
     this.parsedAddressFields = Object.assign({
       street_number: 'short_name',
       route: 'long_name',
