@@ -1,4 +1,5 @@
 import mixin from './mixin'
+import { VTextField } from 'vuetify/lib'
 
 export default {
   mixins: [mixin],
@@ -19,7 +20,7 @@ export default {
   },
   methods: {
     renderInput () {
-      return this.$createElement('VTextField', {
+      return this.$createElement(VTextField, {
         attrs: this.$attrs,
         on: {
           'click:append': () => {
